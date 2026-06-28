@@ -13,7 +13,7 @@
   </a>
 </p>
 
-**A**rchetypal **P**arallel **E**ntity **C**omponent **S**ystem is a ECS for Unity with archetype chunk storage, type-safe queries, deferred command buffers and transient events. Uses **Burst**, **Jobs**, and **Collections** only, no `com.unity.entities`.
+**A**rchetypal **P**arallel **E**ntity **C**omponent **S**ystem (**APECS**) is a ECS for Unity with archetype chunk storage, type-safe queries, deferred command buffers and transient events. Uses **Burst**, **Jobs**, and **Collections** only, no `com.unity.entities`.
 
 <p align="center"><b>⚠️Still In Early Development ⚠️<b/></p>
 
