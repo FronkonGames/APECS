@@ -1,0 +1,30 @@
+{
+  "name": "com.fronkongames.apecs",
+  "version": "0.0.1",
+  "displayName": "APECS",
+  "description": "Archetypal Parallel Entity Component System, a ECS for Unity with archetype chunk storage, type-safe queries, deferred command buffers, and transient events. No com.unity.entities dependency.",
+  "unity": "6000.3",
+  "documentationUrl": "https://fronkongames.github.io/projects/apecs/",
+  "changelogUrl": "https://github.com/FronkonGames/APECS/releases",
+  "licensesUrl": "https://github.com/FronkonGames/APECS/blob/main/LICENSE",
+  "author": {
+    "name": "Fronkon Games",
+    "email": "fronkongames@gmail.com",
+    "url": "https://github.com/FronkonGames"
+  },
+  "keywords": [
+    "ecs",
+    "entity-component-system",
+    "archetype",
+    "burst",
+    "jobs",
+    "data-oriented"
+  ],
+  "dependencies": {
+    "com.unity.burst": "1.8.0",
+    "com.unity.collections": "2.4.0",
+    "com.unity.mathematics": "1.3.0",
+    "com.unity.render-pipelines.core": "17.0.0",
+    "com.unity.render-pipelines.universal": "17.0.0"
+  }
+}
