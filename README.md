@@ -15,6 +15,8 @@
 
 **A**rchetypal **P**arallel **E**ntity **C**omponent **S**ystem is a ECS for Unity with archetype chunk storage, type-safe queries, deferred command buffers and transient events. Uses **Burst**, **Jobs**, and **Collections** only, no `com.unity.entities`.
 
+<p align="center"><b>⚠️Still In Early Development ⚠️<b/></p>
+
 ## Features
 
 - **Archetype chunks**: entities grouped by `ComponentMask`, components stored in `NativeList<T>` per type (128 entities per chunk).
