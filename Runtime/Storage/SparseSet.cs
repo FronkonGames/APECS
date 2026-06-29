@@ -99,15 +99,15 @@ namespace FronkonGames.APECS
     {
       ThrowIfDisposed();
 
-      if (e.Index == 0u || e.Index >= (uint)generations.Length)
+      if (e.index == 0u || e.index >= (uint)generations.Length)
         return;
       
-      if (generations[e.Index] != e.Generation)
+      if (generations[e.index] != e.generation)
         return; // stale handle, no-op
 
-      unchecked { generations[e.Index]++; }
-      locations[e.Index] = default;
-      freeIndices.Push((int)e.Index);
+      unchecked { generations[e.index]++; }
+      locations[e.index] = default;
+      freeIndices.Push((int)e.index);
       aliveCount--;
     }
 
@@ -117,13 +117,13 @@ namespace FronkonGames.APECS
       if (disposed == true)
         return false;
         
-      if (e.Index == 0u)
+      if (e.index == 0u)
         return false;
 
-      if (e.Index >= (uint)generations.Length)
+      if (e.index >= (uint)generations.Length)
         return false;
 
-      return generations[e.Index] == e.Generation;
+      return generations[e.index] == e.generation;
     }
 
     // Location API
@@ -133,13 +133,13 @@ namespace FronkonGames.APECS
     {
       ThrowIfDisposed();
 
-      if (e.Index == 0u || e.Index >= (uint)generations.Length)
+      if (e.index == 0u || e.index >= (uint)generations.Length)
         return;
 
-      if (generations[e.Index] != e.Generation)
+      if (generations[e.index] != e.generation)
         return; // stale, no-op
 
-      locations[e.Index] = record;
+      locations[e.index] = record;
     }
 
     /// <summary> True iff the entity is alive and has a stored location. </summary>
@@ -151,19 +151,19 @@ namespace FronkonGames.APECS
         return false;
       }
 
-      if (e.Index == 0u || e.Index >= (uint)generations.Length)
+      if (e.index == 0u || e.index >= (uint)generations.Length)
       {
         record = default;
         return false;
       }
 
-      if (generations[e.Index] != e.Generation)
+      if (generations[e.index] != e.generation)
       {
         record = default;
         return false;
       }
 
-      record = locations[e.Index];
+      record = locations[e.index];
       return true;
     }
 
@@ -181,13 +181,13 @@ namespace FronkonGames.APECS
     {
       ThrowIfDisposed();
 
-      if (e.Index == 0u || e.Index >= (uint)generations.Length)
+      if (e.index == 0u || e.index >= (uint)generations.Length)
         return;
 
-      if (generations[e.Index] != e.Generation)
+      if (generations[e.index] != e.generation)
         return;
 
-      locations[e.Index] = default;
+      locations[e.index] = default;
     }
 
     // Lifecycle

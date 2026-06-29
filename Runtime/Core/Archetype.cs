@@ -62,14 +62,14 @@ namespace FronkonGames.APECS
         componentToStore[i] = -1;
     }
 
-    /// <summary> Add a new component type store. Used by Phase 3 when a new archetype is created. </summary>
+    /// <summary> Add a new component type store. </summary>
     public void AddStore(IComponentStore store)
     {
       if (store.ComponentId < 0 || store.ComponentId >= ComponentMask.MaxTypes)
         throw new ArgumentOutOfRangeException(nameof(store), "ComponentId out of range.");
 
       if (componentToStore[store.ComponentId] != -1)
-        throw new InvalidOperationException($"Archetype already has a store for component {store.ComponentId}.");
+        throw new InvalidOperationException($"[APECS] Archetype already has a store for component {store.ComponentId}.");
 
       componentToStore[store.ComponentId] = Stores.Count;
       Stores.Add(store);

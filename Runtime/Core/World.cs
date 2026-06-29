@@ -19,16 +19,13 @@ using System.Collections.Generic;
 
 namespace FronkonGames.APECS
 {
-  /// <summary>
-  /// Top-level ECS container. Phase 3 adds multi-archetype storage, component migration on add/remove, and the query
-  /// system on top of the Phase 1 lifecycle and Phase 2 component access.
-  /// </summary>
+  /// <summary> Top-level ECS container. </summary>
   public sealed class World : IDisposable
   {
     /// <summary> Human-readable world name. </summary>
     public string Name { get; }
 
-    /// <summary> Lazy default world, set by WorldBootstrap in Phase 4. </summary>
+    /// <summary> Lazy default world, set by WorldBootstrap. </summary>
     public static World Default
     {
       /// <summary> Gets or sets the process-wide default world. </summary>
@@ -186,7 +183,7 @@ namespace FronkonGames.APECS
       var arch = archetypeStorage.GetById(record.ArchetypeId);
 
       if (arch == null || arch.HasComponent(id) == false)
-        throw new InvalidOperationException($"World.SetComponent<{typeof(T).Name}>: entity {e} does not have this component.");
+        throw new InvalidOperationException($"[APECS] World.SetComponent<{typeof(T).Name}>: entity {e} does not have this component.");
       
       var store = (ComponentStore<T>)arch.GetStore(id);
       store.Set(record.ChunkIndex, record.Row, value);
@@ -202,7 +199,7 @@ namespace FronkonGames.APECS
       var arch = archetypeStorage.GetById(record.ArchetypeId);
       
       if (arch == null || arch.HasComponent(id) == false)
-        throw new InvalidOperationException($"World.GetComponent<{typeof(T).Name}>: entity {e} does not have this component.");
+        throw new InvalidOperationException($"[APECS] World.GetComponent<{typeof(T).Name}>: entity {e} does not have this component.");
 
       var store = (ComponentStore<T>)arch.GetStore(id);
       return store.Get(record.ChunkIndex, record.Row);
@@ -218,7 +215,7 @@ namespace FronkonGames.APECS
       var arch = archetypeStorage.GetById(record.ArchetypeId);
       
       if (arch == null || arch.HasComponent(id) == false)
-        throw new InvalidOperationException($"World.GetComponent<{typeof(T).Name}>: entity {e} does not have this component.");
+        throw new InvalidOperationException($"[APECS] World.GetComponent<{typeof(T).Name}>: entity {e} does not have this component.");
 
       var store = (ComponentStore<T>)arch.GetStore(id);
       return ref store.GetRef(record.ChunkIndex, record.Row);
@@ -253,7 +250,7 @@ namespace FronkonGames.APECS
       var oldRecord = RequireRecord(e);
       var oldArch = archetypeStorage.GetById(oldRecord.ArchetypeId);
       if (oldArch == null)
-        throw new InvalidOperationException($"World.AddComponent<{typeof(T).Name}>: entity {e} has no archetype.");
+        throw new InvalidOperationException($"[APECS] World.AddComponent<{typeof(T).Name}>: entity {e} has no archetype.");
 
       // Build the new mask: old mask | {T}
       var newMask = oldArch.Mask;
@@ -289,7 +286,7 @@ namespace FronkonGames.APECS
       var oldArch = archetypeStorage.GetById(oldRecord.ArchetypeId);
 
       if (oldArch == null)
-        throw new InvalidOperationException($"World.RemoveComponent<{typeof(T).Name}>: entity {e} has no archetype.");
+        throw new InvalidOperationException($"[APECS] World.RemoveComponent<{typeof(T).Name}>: entity {e} has no archetype.");
 
       if (oldArch.Mask.Has(id) == false) // T not present, no-op
         return;

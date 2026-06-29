@@ -22,8 +22,8 @@ namespace FronkonGames.APECS
   /// <summary> Stores service-style class resources and unmanaged value resources keyed by type. </summary>
   public sealed class ResourceContainer : IDisposable
   {
-    private readonly Dictionary<Type, object> classResources = new Dictionary<Type, object>();
-    private readonly Dictionary<Type, object> valueResources = new Dictionary<Type, object>();
+    private readonly Dictionary<Type, object> classResources = new();
+    private readonly Dictionary<Type, object> valueResources = new();
     private bool disposed;
 
     /// <summary> Total number of registered class and value resources. </summary>
@@ -36,10 +36,7 @@ namespace FronkonGames.APECS
     {
       ThrowIfDisposed();
 
-      if (resource == null)
-        throw new ArgumentNullException(nameof(resource));
-
-      classResources[typeof(T)] = resource;
+      classResources[typeof(T)] = resource ?? throw new ArgumentNullException(nameof(resource));
     }
 
     /// <summary> Return the registered class resource, or <c>null</c> if absent. </summary>

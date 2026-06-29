@@ -22,15 +22,6 @@ namespace FronkonGames.APECS
   /// <see cref="SystemBase.GetEventReader{T}"/>; lives on the stack only (ref struct). </summary>
   public ref struct EventReader<T> where T : unmanaged
   {
-    private readonly EventQueue<T> queue;
-    private int cursor;
-
-    public EventReader(EventQueue<T> queue)
-    {
-      this.queue = queue;
-      this.cursor = 0;
-    }
-
     /// <summary> True if no events remain to be read in this frame. </summary>
     public readonly bool IsEmpty => cursor >= queue.ReadableCount;
 
@@ -52,6 +43,18 @@ namespace FronkonGames.APECS
     /// <summary> Duck-typed foreach support: <c>foreach (var evt in reader) { ... }</c>. </summary>
     public readonly EventReader<T> GetEnumerator() => this;
 
+    /// <summary> Value copy of the current event (events are immutable once sent). </summary>
+    public readonly T Current => queue.GetReadableEvents()[cursor - 1];
+
+    private readonly EventQueue<T> queue;
+    private int cursor;
+
+    public EventReader(EventQueue<T> queue)
+    {
+      this.queue = queue;
+      this.cursor = 0;
+    }
+
     /// <summary> Advance the read cursor; returns false when all events have been consumed. </summary>
     public bool MoveNext()
     {
@@ -62,8 +65,5 @@ namespace FronkonGames.APECS
       }
       return false;
     }
-
-    /// <summary> Value copy of the current event (events are immutable once sent). </summary>
-    public readonly T Current => queue.GetReadableEvents()[cursor - 1];
   }
 }

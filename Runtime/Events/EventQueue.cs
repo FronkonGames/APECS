@@ -45,10 +45,10 @@ namespace FronkonGames.APECS
     private NativeList<T> bufferA;
     private NativeList<T> bufferB;
     private bool writeIsA = true;
-    private bool disposed;
+    private readonly bool disposed;
 
     /// <summary> Number of events in the current write buffer. </summary>
-    public int PendingCount  => (writeIsA ? bufferA : bufferB).Length;
+    public int PendingCount => (writeIsA ? bufferA : bufferB).Length;
 
     /// <summary> Number of events available to read this frame. </summary>
     public int ReadableCount => (writeIsA ? bufferB : bufferA).Length;

@@ -29,7 +29,7 @@ namespace FronkonGames.APECS
     /// <inheritdoc />
     public int ComponentId { get; }
 
-    NativeList<T> data;
+    private NativeList<T> data;
 
     public ComponentStore(int componentId)
     {
@@ -39,7 +39,8 @@ namespace FronkonGames.APECS
 
     public void Dispose()
     {
-      if (data.IsCreated) data.Dispose();
+      if (data.IsCreated == true)
+        data.Dispose();
     }
 
     private int FlatIndex(int chunkIndex, int row) => chunkIndex * ArchetypeChunk.Capacity + row;

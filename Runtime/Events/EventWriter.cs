@@ -20,7 +20,7 @@ namespace FronkonGames.APECS
   /// <see cref="SystemBase.GetEventWriter{T}"/>; lives on the stack only (ref struct). </summary>
   public readonly ref struct EventWriter<T> where T : unmanaged
   {
-    readonly EventQueue<T> queue;
+    private readonly EventQueue<T> queue;
 
     internal EventWriter(EventQueue<T> queue) { this.queue = queue; }
 

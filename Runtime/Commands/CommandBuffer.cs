@@ -26,7 +26,7 @@ namespace FronkonGames.APECS
   /// </summary>
   public sealed class CommandBuffer : IDisposable
   {
-    /// <summary> High bit of <see cref="Entity.Index"/> used to mark a provisional entity. </summary>
+    /// <summary> High bit of <see cref="Entity.index"/> used to mark a provisional entity. </summary>
     internal const uint ProvisionalPrefix = 0x80000000u;
 
     private readonly World world;
@@ -98,9 +98,9 @@ namespace FronkonGames.APECS
 
     internal Entity Resolve(Entity e)
     {
-      if ((e.Index & ProvisionalPrefix) == ProvisionalPrefix)
+      if ((e.index & ProvisionalPrefix) == ProvisionalPrefix)
       {
-        int localId = (int)(e.Index & 0x7FFFFFFFu);
+        int localId = (int)(e.index & 0x7FFFFFFFu);
         if (localId >= 0 && localId < provisional.Count)
           return provisional[localId];
       }

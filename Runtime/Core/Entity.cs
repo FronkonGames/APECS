@@ -24,34 +24,34 @@ namespace FronkonGames.APECS
   public readonly struct Entity : IEquatable<Entity>
   {
     /// <summary> Dense entity index (0 is reserved for <see cref="Null"/>). </summary>
-    public readonly uint Index;
+    public readonly uint index;
 
     /// <summary> Generation counter bumped on destroy to invalidate stale handles. </summary>
-    public readonly uint Generation;
+    public readonly uint generation;
 
     /// <summary> True when this is the null entity (Index == 0 and Generation == 0). </summary>
-    public bool IsNull => Index == 0u && Generation == 0u;
+    public bool IsNull => index == 0u && generation == 0u;
 
     /// <summary> Sentinel null entity handle (index and generation both zero). </summary>
     public static Entity Null => default;
 
     public Entity(uint index, uint generation)
     {
-      Index = index;
-      Generation = generation;
+      this.index = index;
+      this.generation = generation;
     }
 
     /// <inheritdoc />
-    public bool Equals(Entity other) => Index == other.Index && Generation == other.Generation;
+    public bool Equals(Entity other) => index == other.index && generation == other.generation;
 
     /// <inheritdoc />
     public override bool Equals(object obj) => obj is Entity other && Equals(other);
 
     /// <inheritdoc />
-    public override int GetHashCode() => unchecked((int)(Index ^ (Generation * 0x9E3779B9u)));
+    public override int GetHashCode() => unchecked((int)(index ^ (generation * 0x9E3779B9u)));
 
     /// <inheritdoc />
-    public override string ToString() => $"Entity(idx:{Index} gen:{Generation})";
+    public override string ToString() => $"Entity(idx:{index} gen:{generation})";
 
     /// <summary> Compare two entity handles for equality. </summary>
     public static bool operator ==(Entity a, Entity b) => a.Equals(b);
